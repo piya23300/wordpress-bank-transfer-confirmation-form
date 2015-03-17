@@ -1,11 +1,12 @@
 <?php
 /*
-Plugin Name: Bank Transfer
+Plugin Name: Confirmation Payment Form
 Plugin URI: http://www.iampiya.com
-Description: tag to show opening or closing your shop on e-commerce
+Description: form for confirm payment page
 Author: Nattawud Sinprasert (PiYA)
 Author URI: http://www.iampiya.com
 Version: 0.0.1
+tags: confirm payment, payment, e-commerce, woo commerce
 */
 
 /**
