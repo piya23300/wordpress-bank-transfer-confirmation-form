@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Confirmation Payment Form
+Plugin Name: Bank Transfer Confirmation Form
 Plugin URI: http://www.iampiya.com
 Description: Building confirmation payment form for e-commerce website that has direct bank payment.
 Author: Nattawud Sinprasert (PiYA)

@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Bank Transfer Confirmation Form ===
 Contributors: -
 Donate link: -
 Tags: confirm payment, payment, e-commerce, woo commerce
