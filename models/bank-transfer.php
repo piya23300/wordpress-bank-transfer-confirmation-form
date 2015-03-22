@@ -1,4 +1,7 @@
 <?php 
+
+require_once "setting_input_field.php";
+
 /**
 * Bank Transfer Model
 */
@@ -14,6 +17,8 @@ class BankTransfer {
   public $amount;
   public $transfered_at;
 
+  public $email_to;
+
   public $error_messages;
   public $email_sent = false;
 
@@ -22,6 +27,11 @@ class BankTransfer {
 
     $this->settings = get_option('bk_options');
 
+    // setting email to
+    $setting_email_to = new SettingInputField( 'email_to', $this->settings );
+    $this->email_to = !empty( $setting_email_to->value ) ? $setting_email_to->value : get_bloginfo('admin_email');
+
+    // setting field for report
     $this->order_number = $this->init_params( "order_number", $args );
     $this->email = $this->init_params( "email", $args );
     $this->telephone = $this->init_params( "telephone", $args );
@@ -45,8 +55,6 @@ class BankTransfer {
 
   public function send_email() {
     if( $this->valid() ) {
-      // $emailTo = get_option('tz_email');
-      $emailTo = $this->settings['email_to'];
       $subject = "[Bank Transfer] Order Number #$this->order_number";
       $body = "
                 Order Number: $this->contact_name \n
@@ -59,7 +67,7 @@ class BankTransfer {
               ";
       $headers = 'From: Bank Transfer Plugin <'.get_bloginfo('admin_email').'>' . "\r\n" . 'Reply-To: ' . $emailTo;
 
-      wp_mail($emailTo, $subject, $body, $headers);
+      wp_mail($this->email_to, $subject, $body, $headers);
       $this->email_sent = true;
     } else {
       $this->email_sent = false;

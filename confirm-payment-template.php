@@ -6,8 +6,8 @@ Template Name: Contact
 
 <?php
 
-require "models/bank-transfer.php";
-
+require_once "models/bank-transfer.php";
+// require_once "models/setting_input_field.php";
 
 $BankTransfer = new BankTransfer( $_POST );
 if( isset($_POST['submitted']) && $_POST['submitted'] == true ) {
