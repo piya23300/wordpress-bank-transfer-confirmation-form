@@ -5,7 +5,7 @@ Plugin URI: http://www.iampiya.com
 Description: Building confirmation payment form for e-commerce website that has direct bank payment.
 Author: Nattawud Sinprasert (PiYA)
 Author URI: http://www.iampiya.com
-Version: 0.0.1
+Version: 0.0.2
 tags: confirm payment, payment, e-commerce, woo commerce
 */
 
