@@ -1,7 +1,4 @@
 <?php 
-
-require_once "setting_input_field.php";
-
 /**
 * Bank Transfer Model
 */

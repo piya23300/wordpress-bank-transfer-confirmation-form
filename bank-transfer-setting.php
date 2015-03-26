@@ -1,33 +1,17 @@
 <?php 
 
-require_once "models/setting_input_field.php";
-require_once "models/form_input_field.php";
-
 class BankTransferSetting {
 
   private $options;
 
-  private $setting_email_to;
-  private $input_name;
-  private $input_email;
-  private $input_telephone;
-  private $input_order_number;
-  private $input_bank;
-  private $input_transfered_at;
-  private $input_amount;
+  private $settings;
+  private $form;
   
   public function __construct() {
     $this->options = get_option('bk_options');
 
-    $this->setting_email_to = new SettingInputField( 'email_to', $this->options);
-
-    $this->input_name = new FormInputField( 'name', $this->options);
-    $this->input_email = new FormInputField( 'email', $this->options);
-    $this->input_telephone = new FormInputField( 'telephone', $this->options);
-    $this->input_order_number = new FormInputField( 'order_number', $this->options);
-    $this->input_bank = new FormInputField( 'bank', $this->options);
-    $this->input_transfered_at = new FormInputField( 'transfered_at', $this->options);
-    $this->input_amount = new FormInputField( 'amount', $this->options);
+    $this->settings = new Setting($this->options);
+    $this->form = new Form($this->options);
 
     add_action('admin_menu',  array( $this, 'add_plugin_page') );
     add_action('admin_init', array( $this, 'page_init' ) );
@@ -74,9 +58,9 @@ class BankTransferSetting {
 
 
     add_settings_field(
-      $this->setting_email_to->setting_attr_names['value'], 
+      $this->settings->email_to->setting_attr_names['value'], 
       'Email To', 
-      array( $this->setting_email_to, 'input_tag' ),
+      array( $this->settings->email_to, 'input_tag' ),
       'my-setting-admin', 
       'general_setting_id'
     );   
@@ -89,57 +73,65 @@ class BankTransferSetting {
     );
 
     add_settings_field(
-      $this->input_name->setting_attr_names['label'], 
+      $this->form->name->setting_attr_names['label'], 
       'Name', 
-      array( $this->input_name, 'input_label_tag' ), 
+      array( $this->form->name, 'input_label_tag' ), 
       'my-setting-admin', 
       'form_setting_id'
     );
 
     add_settings_field(
-      $this->input_email->setting_attr_names['label'], 
+      $this->form->email->setting_attr_names['label'], 
       'Email', 
-      array( $this->input_email, 'input_label_tag' ),  
+      array( $this->form->email, 'input_label_tag' ),  
       'my-setting-admin', 
       'form_setting_id'
     );
 
     add_settings_field(
-      $this->input_telephone->setting_attr_names['label'], 
+      $this->form->telephone->setting_attr_names['label'], 
       'Telephone', 
-      array( $this->input_telephone, 'input_label_tag' ),  
+      array( $this->form->telephone, 'input_label_tag' ),  
       'my-setting-admin', 
       'form_setting_id'
     );
 
     add_settings_field(
-      $this->input_order_number->setting_attr_names['label'], 
+      $this->form->order_number->setting_attr_names['label'], 
       'Order Number', 
-      array( $this->input_order_number, 'input_label_tag' ),  
+      array( $this->form->order_number, 'input_label_tag' ),  
       'my-setting-admin', 
       'form_setting_id'
     );
 
     add_settings_field(
-      $this->input_bank->setting_attr_names['label'], 
+      $this->form->bank->setting_attr_names['label'], 
       'Bank', 
-      array( $this->input_bank, 'input_label_tag' ),  
+      array( $this->form->bank, 'input_label_tag' ),  
       'my-setting-admin', 
       'form_setting_id'
     );
 
     add_settings_field(
-      $this->input_transfered_at->setting_attr_names['label'], 
+      $this->form->transfered_at->setting_attr_names['label'], 
       'Transfered At', 
-      array( $this->input_transfered_at, 'input_label_tag' ),  
+      array( $this->form->transfered_at, 'input_label_tag' ),  
       'my-setting-admin', 
       'form_setting_id'
     );
 
     add_settings_field(
-      $this->input_amount->setting_attr_names['label'], 
+      $this->form->amount->setting_attr_names['label'], 
       'Amount', 
-      array( $this->input_amount, 'input_label_tag' ),  
+      array( $this->form->amount, 'input_label_tag' ),  
+      'my-setting-admin', 
+      'form_setting_id'
+    );
+
+    add_settings_field(
+      $this->form->submit->setting_attr_names['label'], 
+      'Submit', 
+      array( $this->form->submit, 'input_label_tag' ),  
       'my-setting-admin', 
       'form_setting_id'
     );
@@ -157,26 +149,29 @@ class BankTransferSetting {
     if( isset( $input['setting_email_to'] ) )
       $new_input['setting_email_to'] = sanitize_text_field( $input['setting_email_to'] );
 
-    if( isset( $input[$this->input_name->setting_attr_names['label']] ) )
-      $new_input[$this->input_name->setting_attr_names['label']] = sanitize_text_field( $input[$this->input_name->setting_attr_names['label']] );
+    if( isset( $input[$this->form->name->setting_attr_names['label']] ) )
+      $new_input[$this->form->name->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->name->setting_attr_names['label']] );
     
-    if( isset( $input[$this->input_email->setting_attr_names['label']] ) )
-      $new_input[$this->input_email->setting_attr_names['label']] = sanitize_text_field( $input[$this->input_email->setting_attr_names['label']] );
+    if( isset( $input[$this->form->email->setting_attr_names['label']] ) )
+      $new_input[$this->form->email->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->email->setting_attr_names['label']] );
     
-    if( isset( $input[$this->input_telephone->setting_attr_names['label']] ) )
-      $new_input[$this->input_telephone->setting_attr_names['label']] = sanitize_text_field( $input[$this->input_telephone->setting_attr_names['label']] );
+    if( isset( $input[$this->form->telephone->setting_attr_names['label']] ) )
+      $new_input[$this->form->telephone->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->telephone->setting_attr_names['label']] );
     
-    if( isset( $input[$this->input_order_number->setting_attr_names['label']] ) )
-      $new_input[$this->input_order_number->setting_attr_names['label']] = sanitize_text_field( $input[$this->input_order_number->setting_attr_names['label']] );
+    if( isset( $input[$this->form->order_number->setting_attr_names['label']] ) )
+      $new_input[$this->form->order_number->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->order_number->setting_attr_names['label']] );
     
-    if( isset( $input[$this->input_bank->setting_attr_names['label']] ) )
-      $new_input[$this->input_bank->setting_attr_names['label']] = sanitize_text_field( $input[$this->input_bank->setting_attr_names['label']] );
+    if( isset( $input[$this->form->bank->setting_attr_names['label']] ) )
+      $new_input[$this->form->bank->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->bank->setting_attr_names['label']] );
     
-    if( isset( $input[$this->input_transfered_at->setting_attr_names['label']] ) )
-      $new_input[$this->input_transfered_at->setting_attr_names['label']] = sanitize_text_field( $input[$this->input_transfered_at->setting_attr_names['label']] );
+    if( isset( $input[$this->form->transfered_at->setting_attr_names['label']] ) )
+      $new_input[$this->form->transfered_at->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->transfered_at->setting_attr_names['label']] );
     
-    if( isset( $input[$this->input_amount->setting_attr_names['label']] ) )
-      $new_input[$this->input_amount->setting_attr_names['label']] = sanitize_text_field( $input[$this->input_amount->setting_attr_names['label']] );
+    if( isset( $input[$this->form->amount->setting_attr_names['label']] ) )
+      $new_input[$this->form->amount->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->amount->setting_attr_names['label']] );
+
+    if( isset( $input[$this->form->submit->setting_attr_names['label']] ) )
+      $new_input[$this->form->submit->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->submit->setting_attr_names['label']] );
 
     return $new_input;
   }
