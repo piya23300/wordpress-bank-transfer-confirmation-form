@@ -17,12 +17,14 @@ Building confirmation payment form for e-commerce website that has direct bank p
 This plugin provide
 
 * confirmation payment form
-* auto send email which you set at management page
+* auto send email
+* custom label which you want
 
 How to use..
 
-1. create new page
-2. block Page Attributes > Template select "Bank Transfer Template"
+1. custom settings at settings->bank transfer
+2. create new page
+3. set Page Attributes > Template select "Bank Transfer Template"
 
 == Installation ==
 
@@ -38,6 +40,9 @@ How to use..
 
 == Changelog ==
 
+= 0.0.2 =
+
+* you can set display label for theme
 
 = 0.0.1 =
 
