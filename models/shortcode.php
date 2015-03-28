@@ -30,7 +30,6 @@ class Shortcode {
   }
 
   public function bank_confirmation_form() {
-    var_dump( $_POST );
     $this->BankTransfer = new BankTransfer( $_POST );
     $this->Form = new Form( get_option('bk_options') );
     if( isset($_POST['submitted']) && $_POST['submitted'] == true ) {

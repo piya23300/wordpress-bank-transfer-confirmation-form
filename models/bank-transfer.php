@@ -20,8 +20,6 @@ class BankTransfer {
   public $email_sent = false;
 
   public function __construct( $args ) {
-    add_action( 'plugins_loaded', array( $this, 'send_email') );
-
     $this->settings = get_option('bk_options');
 
     // setting email to
@@ -65,10 +63,8 @@ class BankTransfer {
       $headers = 'From: Bank Transfer Plugin <'.get_bloginfo('admin_email').'>' . "\r\n" . 'Reply-To: ' . $emailTo;
 
       wp_mail($this->email_to, $subject, $body, $headers);
-      echo "successfully send email.";
       $this->email_sent = true;
     } else {
-      echo "invalid to send email!";
       $this->email_sent = false;
     }
   }

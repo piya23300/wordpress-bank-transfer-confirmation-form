@@ -73,9 +73,9 @@ class BankTransferSetting {
     );
 
     add_settings_field(
-      $this->form->name->setting_attr_names['label'], 
+      $this->form->contact_name->setting_attr_names['label'], 
       'Name', 
-      array( $this->form->name, 'input_label_tag' ), 
+      array( $this->form->contact_name, 'input_label_tag' ), 
       'my-setting-admin', 
       'form_setting_id'
     );
@@ -149,8 +149,8 @@ class BankTransferSetting {
     if( isset( $input['setting_email_to'] ) )
       $new_input['setting_email_to'] = sanitize_text_field( $input['setting_email_to'] );
 
-    if( isset( $input[$this->form->name->setting_attr_names['label']] ) )
-      $new_input[$this->form->name->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->name->setting_attr_names['label']] );
+    if( isset( $input[$this->form->contact_name->setting_attr_names['label']] ) )
+      $new_input[$this->form->contact_name->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->contact_name->setting_attr_names['label']] );
     
     if( isset( $input[$this->form->email->setting_attr_names['label']] ) )
       $new_input[$this->form->email->setting_attr_names['label']] = sanitize_text_field( $input[$this->form->email->setting_attr_names['label']] );
