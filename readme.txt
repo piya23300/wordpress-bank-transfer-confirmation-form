@@ -4,7 +4,7 @@ Donate link: -
 Tags: confirm payment, payment, e-commerce, woo commerce
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,8 +23,7 @@ This plugin provide
 How to use..
 
 1. custom settings at settings->bank transfer
-2. create new page
-3. set Page Attributes > Template select "Bank Transfer Template"
+2. add shortcode [bank_confirmation_form] at somewhere that you want (post, page)
 
 == Installation ==
 
