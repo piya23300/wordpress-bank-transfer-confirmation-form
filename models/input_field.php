@@ -21,12 +21,13 @@ class InputField
     if( $settings != null ) {
       $this->settings_data = $settings;
 
-      if( empty( $this->get_value('label') ) ) {
+      $label = $this->get_value('label');
+      if( empty( $label ) ) {
         $this->label = ucfirst( str_replace('_', ' ', $this->id) );
       } else {
-        $this->label = $this->get_value('label');
+        $this->label = $label;
       }
-      
+
       $this->value = $this->get_value('value');
     }
     
