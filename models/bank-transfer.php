@@ -10,7 +10,7 @@ class BankTransfer {
   public $email;
   public $telephone;
   public $contact_name;
-  public $bank_account;
+  public $bank;
   public $amount;
   public $transfered_at;
 
@@ -33,19 +33,19 @@ class BankTransfer {
     $this->email = $this->init_params( "email", $args );
     $this->telephone = $this->init_params( "telephone", $args );
     $this->contact_name = $this->init_params( "contact_name", $args );
-    $this->bank_account = $this->init_params( "bank_account", $args );
+    $this->bank = $this->init_params( "bank", $args );
     $this->amount = $this->init_params( "amount", $args );
     $this->transfered_at = $this->init_params( "transfered_at", $args );
   }
 
   function valid() {
-    $this->param_required("order_number");
-    $this->valid_email("email");
-    $this->param_required("telephone");
     $this->param_required("contact_name");
-    $this->param_required("bank_account");
-    $this->param_required("amount");
+    $this->valid_email("email");
+    $this->param_required("order_number");
+    $this->param_required("telephone");
+    $this->param_required("bank");
     $this->param_required("transfered_at");
+    $this->param_required("amount");
 
     return empty( $this->error_messages ) ? true : false;
   }
@@ -54,19 +54,21 @@ class BankTransfer {
     if( $this->valid() ) {
       $subject = "[Bank Transfer] Order Number #$this->order_number";
       $body = "
-                Order Number: $this->contact_name \n
+                Order Number: $this->order_number \n
                 Name: $this->contact_name \n
                 email: $this->email \n
                 telephone: $this->telephone \n
-                bank_account: $this->bank_account \n
+                bank: $this->bank \n
                 transfered_at: $this->transfered_at \n
                 amount: $this->amount \n
               ";
       $headers = 'From: Bank Transfer Plugin <'.get_bloginfo('admin_email').'>' . "\r\n" . 'Reply-To: ' . $emailTo;
 
       wp_mail($this->email_to, $subject, $body, $headers);
+      echo "successfully send email.";
       $this->email_sent = true;
     } else {
+      echo "invalid to send email!";
       $this->email_sent = false;
     }
   }

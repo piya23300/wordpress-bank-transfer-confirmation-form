@@ -7,7 +7,7 @@ class Form {
 
   private $data;
 
-  public $name;
+  public $contact_name;
   public $email;
   public $telephone;
   public $order_number;
@@ -19,7 +19,7 @@ class Form {
   function __construct($data=null) {
     $this->data = $data;
     
-    $this->name = new FormInputField( 'name', $this->data);
+    $this->contact_name = new FormInputField( 'contact_name', $this->data);
     $this->email = new FormInputField( 'email', $this->data);
     $this->telephone = new FormInputField( 'telephone', $this->data);
     $this->order_number = new FormInputField( 'order_number', $this->data);

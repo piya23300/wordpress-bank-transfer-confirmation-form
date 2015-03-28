@@ -34,10 +34,10 @@ if( isset($_POST['submitted']) && $_POST['submitted'] == true ) {
             <form action="<?php the_permalink(); ?>" id="contactForm" method="post">
               <ul class="contactform">
               <li>
-                <label for="contact_name"><?php echo ($FormSetting->name->label) ? $FormSetting->name->label : 'Name:'; ?></label>
-                <input type="text" name="contact_name" id="contact_name" value="<?php echo $BankTransfer->contact_name; ?>" class="required requiredField" />
-                <?php if( isset($BankTransfer->error_messages['contact_name'])) { ?>
-                  <span class="error"><?= $BankTransfer->error_messages['contact_name']; ?></span>
+                <label for="name"><?php echo ($FormSetting->name->label) ? $FormSetting->name->label : 'Name:'; ?></label>
+                <input type="text" name="name" id="name" value="<?php echo $BankTransfer->name; ?>" class="required requiredField" />
+                <?php if( isset($BankTransfer->error_messages['name'])) { ?>
+                  <span class="error"><?= $BankTransfer->error_messages['name']; ?></span>
                 <?php } ?>
               </li>
 

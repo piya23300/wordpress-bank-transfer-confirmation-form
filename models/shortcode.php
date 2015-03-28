@@ -44,7 +44,7 @@ class Shortcode {
     if( !$this->BankTransfer->email_sent ) {
       $html .= $this->invalid_form();
       $html .= "<form action=\"". get_permalink() . "\" id=\"contactForm\" method=\"post\">";
-      $html .= $this->input_group('name');
+      $html .= $this->input_group('contact_name');
       $html .= $this->input_group('email');
       $html .= $this->input_group('telephone');
       $html .= $this->input_group('order_number');
@@ -54,7 +54,7 @@ class Shortcode {
       $html .= $this->submit_tag($this->Form->submit->label);
       $html .= "</form>";
     } else {
-      $html = $this->successfuly_send_email();
+      $html .= $this->successfuly_send_email();
     }
     return $html;
   }
@@ -62,9 +62,10 @@ class Shortcode {
   private function input_group($attr_name) {
     $id = $this->Form->$attr_name->id;
     $display_label = $this->Form->$attr_name->label;
-
+    $value = $this->BankTransfer->$attr_name;
+    $error = $this->BankTransfer->error_messages[$attr_name];
     $html = '<div>';
-    $html .= $this->label_tag($display_label, $id) . $this->input_tag($id);
+    $html .= $this->label_tag($display_label, $id) . $this->input_tag($id, $value, $error);
     $html .= '</div>';
     return $html;
   }
@@ -74,11 +75,11 @@ class Shortcode {
     
   }
 
-  private function input_tag($attr_name, $value=null, $klass=null) {
+  private function input_tag($attr_name, $value=null, $error=null, $klass=null) {
     $html = '<input type="text" name="'.$attr_name.'" id="'.$attr_name.'" value="'.$value.'" class="'.$kalss.'" />';
 
-    if( isset($this->BankTransfer->error_messages['amount'])) {
-      $html .= '<span class="error">'.$this->BankTransfer->error_messages['amount'].'</span>';
+    if( isset($error)) {
+      $html .= '<span class="error">'.$error.'</span>';
     }
     return $html;
   }
