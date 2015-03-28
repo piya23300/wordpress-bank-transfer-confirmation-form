@@ -63,7 +63,7 @@ class PageTemplater {
 
     // Add your templates to this array.
     $this->templates = array(
-      'confirm-payment-template.php'     => 'Bank Transfer Template',
+      'templates/confirm-payment-template.php'     => 'Bank Transfer Template',
     );
   
   } 
